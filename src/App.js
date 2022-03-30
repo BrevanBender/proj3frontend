@@ -50,7 +50,7 @@ function App() {
   }
   const deletePost = async (postId)=>{
     try{
-    const apiResponse = await fetch(`${apiUrl}/${postId}`,{
+    const apiResponse = await fetch(`${apiUrl}${postId}`,{
     method: "DELETE",
   })
   const parsedResponse = await apiResponse.json()
@@ -65,7 +65,7 @@ function App() {
     console.log(err)
   }}
   const updatePost = async(idToUpdate, postToUpdate)=>{
-    const apiResponse = await fetch(`${apiUrl}/${idToUpdate}`,{
+    const apiResponse = await fetch(`${apiUrl}${idToUpdate}`,{
       method: "PUT",
       body: JSON.stringify(postToUpdate),
       headers:{
