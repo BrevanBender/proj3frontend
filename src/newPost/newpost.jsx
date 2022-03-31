@@ -1,6 +1,11 @@
 import react, {useState} from "react";
 import FileBase64 from 'react-file-base64'
 const NewPost = (props)=>{
+    const [showNew, setShowNew] = useState(false)
+    const toggleNew = ()=>{
+      setShowNew(!showNew)
+    }
+    
     const[newPost, setNewPost] = useState({
         location: '',
         shotwith: '',
@@ -15,6 +20,11 @@ const NewPost = (props)=>{
     }
     return(
     <div className="newpost">
+        {!showNew ?
+        <button id="newButton" onClick={toggleNew}>+</button>
+        :
+        <div id="newForm">
+        <button id="closeNew" onClick={toggleNew}>Close</button>
         <form onSubmit={(e)=>{
             e.preventDefault()
             props.createNewPost(newPost)
@@ -31,6 +41,8 @@ const NewPost = (props)=>{
             Image: <FileBase64 multiple={false} onDone={({base64})=>setNewPost({...newPost, image: base64})} />
             <button type="submit">Post!</button>
         </form>
+        </div>
+        }   
     </div>
     )
 }

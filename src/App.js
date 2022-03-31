@@ -12,12 +12,41 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { ListItem } from '@mui/material';
 import apiUrl from './apiconfig';
+import ReqLogin from './login/login';
 
 
 function App() {
   const [geoPosts, setPosts] = useState([])
+  const [user, setUser] = useState({})
+  
+  const reqSignUp = async (newLogin)=>{
+    const apiResponse = await fetch('http://localhost:3001/profile/signup', {
+        method: 'POST',
+        body: JSON.stringify(newLogin),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const parsedResponse = await apiResponse.json()
+    console.log(parsedResponse)
+    setUser(parsedResponse.data)
+    alert(`Logged in as new user ${parsedResponse.data.username}`)
+}
+  const reqLogin = async (newLogin) =>{
+    const apiResponse = await fetch('http://localhost:3001/profile/login', {
+        method: 'POST',
+        body: JSON.stringify(newLogin),
+        headers: {
+          "Content-Type": "application/json"
+        }
+  })
+  const parsedResponse = await apiResponse.json()
+  console.log(parsedResponse)
+  setUser(parsedResponse.data)
+}
+
   const getPosts = async () =>{
-    const apiResponse = await fetch(apiUrl)
+    const apiResponse = await fetch(`${apiUrl}/posts`)
   
     const parsedResponse = await apiResponse.json()
     console.log(parsedResponse.data)
@@ -37,7 +66,7 @@ function App() {
     console.log(newPost)
     setPosts([newPost, ...geoPosts])
     console.log(geoPosts)
-    const apiResponse = await fetch(apiUrl, {
+    const apiResponse = await fetch(`${apiUrl}posts`, {
       method: 'POST',
       body: JSON.stringify(newPost),
       headers: {
@@ -50,7 +79,7 @@ function App() {
   }
   const deletePost = async (postId)=>{
     try{
-    const apiResponse = await fetch(`${apiUrl}${postId}`,{
+    const apiResponse = await fetch(`${apiUrl}posts/${postId}`,{
     method: "DELETE",
   })
   const parsedResponse = await apiResponse.json()
@@ -65,7 +94,7 @@ function App() {
     console.log(err)
   }}
   const updatePost = async(idToUpdate, postToUpdate)=>{
-    const apiResponse = await fetch(`${apiUrl}${idToUpdate}`,{
+    const apiResponse = await fetch(`${apiUrl}posts/${idToUpdate}`,{
       method: "PUT",
       body: JSON.stringify(postToUpdate),
       headers:{
@@ -79,8 +108,14 @@ function App() {
   useEffect(getPosts, [])
   
   return (
-  
+    
     <div className="App">
+
+      {
+      !user._id ?
+      <ReqLogin reqSignUp={reqSignUp} reqLogin={reqLogin}></ReqLogin>
+      :
+      
       <TabContext value={value}>
         <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <TabList value={value} onChange={handleChange} centered>
@@ -89,24 +124,21 @@ function App() {
             <Tab label="Search" value="3"/>
           </TabList>
         </Box>
+
       
         <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer geoPosts={geoPosts}></SearchContainer></TabPanel>
+        <NewPost createNewPost={createNewPost}></NewPost>
         
 
       </TabContext>
 
-      {
-        !showNew ?
-        <button id="newButton" onClick={toggleNew}>+</button>
-        :
-        <div id="newPostForm">
-          <NewPost createNewPost={createNewPost}></NewPost>
-          <button id="closeNew" onClick={toggleNew}>Close</button>
-        </div>
-      }
+      
+         
+    }
     </div>
+
   );
 }
 
