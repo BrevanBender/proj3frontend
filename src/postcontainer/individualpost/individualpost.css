@@ -1,0 +1,11 @@
+#indiCont{
+    width: 40vw;
+    height: 40vh;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+#indiCont img{
+    max-width: 100%;
+}

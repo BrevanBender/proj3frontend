@@ -2,7 +2,7 @@ let apiUrl
 
 const apiUrls = {
     production: "https://apiforgeogram.herokuapp.com/",
-    development: "http://localhost:3001"
+    development: "http://localhost:3001/"
 }
 
 if (window.location.hostname === "localhost") {

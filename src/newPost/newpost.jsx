@@ -10,12 +10,14 @@ const NewPost = (props)=>{
         location: '',
         shotwith: '',
         caption: '',
-        image: ''
+        image: '',
+        user: `${props.user._id}`
     })
     const handleInputChange = (e)=>{
         setNewPost({
             ...newPost,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            user: `${props.user._id}`
         })
     }
     return(

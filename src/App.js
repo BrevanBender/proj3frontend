@@ -79,6 +79,7 @@ function App() {
   }
   const deletePost = async (postId)=>{
     try{
+    console.log(postId)
     const apiResponse = await fetch(`${apiUrl}posts/${postId}`,{
     method: "DELETE",
   })
@@ -129,7 +130,7 @@ function App() {
         <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer geoPosts={geoPosts}></SearchContainer></TabPanel>
-        <NewPost createNewPost={createNewPost}></NewPost>
+        <NewPost createNewPost={createNewPost} user={user}></NewPost>
         
 
       </TabContext>

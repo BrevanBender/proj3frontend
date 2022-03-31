@@ -1,4 +1,5 @@
 import react, {useState} from "react";
+import './individualpost.css'
 
 const IndividualPost = (props) =>{
     console.log(`this is picture ${props.post}`)
@@ -25,11 +26,11 @@ const IndividualPost = (props) =>{
         //setshowing false and add ternary to update
     }
     return (
-        <div>
+        <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}>
             <h3>{props.post.location}</h3>
             <h5>{props.post.shotwith}</h5>
-            <img src={props.post.image} alt="" />
             <button onClick={()=>{
+                console.log(props.post)
                 props.deletePost(props.post._id)}
             }>Delete this</button>
         {
