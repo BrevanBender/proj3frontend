@@ -20,7 +20,7 @@ function App() {
   const [user, setUser] = useState({})
   
   const reqSignUp = async (newLogin)=>{
-    const apiResponse = await fetch('http://localhost:3001/profile/signup', {
+    const apiResponse = await fetch(`${apiUrl}profile/signup`, {
         method: 'POST',
         body: JSON.stringify(newLogin),
         headers: {
@@ -33,7 +33,7 @@ function App() {
     alert(`Logged in as new user ${parsedResponse.data.username}`)
 }
   const reqLogin = async (newLogin) =>{
-    const apiResponse = await fetch('http://localhost:3001/profile/login', {
+    const apiResponse = await fetch(`${apiUrl}profile/login`, {
         method: 'POST',
         body: JSON.stringify(newLogin),
         headers: {
@@ -46,7 +46,7 @@ function App() {
 }
 
   const getPosts = async () =>{
-    const apiResponse = await fetch(`${apiUrl}/posts`)
+    const apiResponse = await fetch(`${apiUrl}posts`)
   
     const parsedResponse = await apiResponse.json()
     console.log(parsedResponse.data)
