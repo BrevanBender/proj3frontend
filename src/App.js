@@ -127,7 +127,7 @@ function App() {
         </Box>
 
       
-        <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost}></PostContainer></TabPanel>
+        <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer geoPosts={geoPosts}></SearchContainer></TabPanel>
         <NewPost createNewPost={createNewPost} user={user}></NewPost>

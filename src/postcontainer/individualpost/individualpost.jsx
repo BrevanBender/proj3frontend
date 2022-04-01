@@ -1,9 +1,19 @@
+
+import Edit from './edit/edit'
 import react, {useState} from "react";
 import './individualpost.css'
 
 const IndividualPost = (props) =>{
-    console.log(`this is picture ${props.post}`)
+    console.log(props.post.user)
+    console.log(props.user)
+    const[showCap, setShowCap] = useState(false)
     const[showForm, setShowForm]= useState(false)
+    const showCaption = (e)=>{
+        e.target.classList.toggle('show-caption')
+    }
+    const dontShowCaption = (e)=>{
+        e.target.classList.remove('show-caption')
+    }
     const toggleForm = ()=>{
         setShowForm(!showForm)
       }
@@ -26,27 +36,24 @@ const IndividualPost = (props) =>{
         //setshowing false and add ternary to update
     }
     return (
-        <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}>
+        <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}
+        onMouseEnter={showCaption}
+        onMouseLeave={dontShowCaption}>
+            <div id="titles">
             <h3>{props.post.location}</h3>
             <h5>{props.post.shotwith}</h5>
+            </div>
+            <p id="caption">{props.post.caption}</p>
+        { props.user._id == props.post.user?
+        <div id='postOwner'>
             <button onClick={()=>{
                 console.log(props.post)
                 props.deletePost(props.post._id)}
             }>Delete this</button>
-        {
-        !showForm ?
-        
-        <button onClick={toggleForm}>Update Post</button>
-        :
-        <form onSubmit={submitUpdatePost}>
-            Location: <input type='text'  name='location'onChange={handleInputChange} value={updatePost.location}></input>
-            Shot With: <input type='text'  name='shotwith'onChange={handleInputChange} value={updatePost.shotwith}></input>
-            Caption: <input type='text' name='caption' onChange={handleInputChange} value={updatePost.caption}></input>
-            
-            <button type="submit">Update Post!</button>
-            <button onClick={toggleForm}>x</button>
-        </form>
-        }
+        <Edit updatePost={props.updatePost} post={props.post}></Edit>
+        </div>
+        : null
+        }   
         </div>
     )
 }
