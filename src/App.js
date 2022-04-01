@@ -107,7 +107,8 @@ function App() {
     const newPosts = geoPosts.map(post =>post._id===idToUpdate ? postToUpdate : post)
     setPosts(newPosts)
   }
-  const likePost = async(idToLike, postToLike, userId, userLiked)=>{
+  const likePost = async(e, idToLike, postToLike, userId, userLiked)=>{
+    e.preventDefault()
     const apiResponse = await fetch(`${apiUrl}posts/${idToLike}`,{
       method: "PUT",
       body: JSON.stringify(postToLike),
@@ -118,6 +119,7 @@ function App() {
     })
     const newPosts = geoPosts.map(post =>post._id===idToLike ? postToLike : post)
     setPosts(newPosts)
+    
     const apiResponseUser = await fetch(`${apiUrl}profile/${userId}`,{
       method: "PUT",
       body: JSON.stringify(userLiked),
@@ -126,7 +128,7 @@ function App() {
       }
     })
     setUser(userLiked)
-
+    return false
   }
   useEffect(getPosts, [])
   

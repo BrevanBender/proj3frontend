@@ -29,6 +29,8 @@ p{
     height: fit-content;
     opacity: 1;
 }
-#postOwner{
-    
+#buttons{
+    position: absolute;
+    height: 15px;
+    bottom: -15px;
 }

@@ -45,7 +45,7 @@ const IndividualPost = (props) =>{
             <h5>{props.post.shotwith}</h5>
             </div>
             <p id="caption">{props.post.caption}</p>
-            <PostButton likePost={props.likePost}></PostButton>
+            <PostButton id="buttons"likePost={props.likePost} post={props.post} user={props.user}></PostButton>
         { props.user._id == props.post.user?
         <div id='postOwner'>
             <button onClick={()=>{

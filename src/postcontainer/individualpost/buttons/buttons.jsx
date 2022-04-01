@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './buttons.css'
 
 const PostButton = (props)=>{
     const[likedPost, setLikedPost] = useState({
@@ -28,22 +29,26 @@ const PostButton = (props)=>{
     }
     return(
         <div id="buttons">
-            <section onClick={()=>{
-                handleLike()
-                props.likedPost(props.post._id, likedPost, props.user._id, userLiked)
-            }}>
-                Likes
-                {props.post.likes}
-            </section>
-            <section>
-                Comments
-            </section>
-            <section>
-                Share
-            </section>
-            <section>
-                ...
-            </section>
+
+            <form onSubmit={(e)=>{
+                e.preventDefault()
+                handleLike(e)
+                props.likePost(e, props.post._id, likedPost, props.user._id, userLiked)
+                console.log(props.user)
+                return false
+                }
+                 } className='formStyling'>
+                <button type="submit" className="formButtons">Likes <br />{props.post.likes}</button>
+                </form>
+            <form className='formStyling'>
+                <button className="formButtons">Comment <br /> {props.post.comments.length}</button>
+            </form>
+            <form className='formStyling'>
+                <button className="formButtons">Share <br /><span></span></button>
+            </form>
+            <form className='formStyling'>
+                <button className="formButtons">... <br /><span></span></button>
+            </form>
         </div>
     )
 }
