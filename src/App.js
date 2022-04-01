@@ -102,9 +102,31 @@ function App() {
         "Content-Type": "application/json"
       }
     })
+    
     const parsedResponse = await apiResponse.json()
     const newPosts = geoPosts.map(post =>post._id===idToUpdate ? postToUpdate : post)
     setPosts(newPosts)
+  }
+  const likePost = async(idToLike, postToLike, userId, userLiked)=>{
+    const apiResponse = await fetch(`${apiUrl}posts/${idToLike}`,{
+      method: "PUT",
+      body: JSON.stringify(postToLike),
+      headers:{
+        "Content-Type": "application/json"
+      }
+    
+    })
+    const newPosts = geoPosts.map(post =>post._id===idToLike ? postToLike : post)
+    setPosts(newPosts)
+    const apiResponseUser = await fetch(`${apiUrl}profile/${userId}`,{
+      method: "PUT",
+      body: JSON.stringify(userLiked),
+      headers:{
+        "Content-Type": "application/json"
+      }
+    })
+    setUser(userLiked)
+
   }
   useEffect(getPosts, [])
   
@@ -127,7 +149,7 @@ function App() {
         </Box>
 
       
-        <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user}></PostContainer></TabPanel>
+        <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer geoPosts={geoPosts}></SearchContainer></TabPanel>
         <NewPost createNewPost={createNewPost} user={user}></NewPost>

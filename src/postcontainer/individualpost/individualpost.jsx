@@ -2,6 +2,7 @@
 import Edit from './edit/edit'
 import react, {useState} from "react";
 import './individualpost.css'
+import PostButton from './buttons/buttons';
 
 const IndividualPost = (props) =>{
     console.log(props.post.user)
@@ -44,6 +45,7 @@ const IndividualPost = (props) =>{
             <h5>{props.post.shotwith}</h5>
             </div>
             <p id="caption">{props.post.caption}</p>
+            <PostButton likePost={props.likePost}></PostButton>
         { props.user._id == props.post.user?
         <div id='postOwner'>
             <button onClick={()=>{

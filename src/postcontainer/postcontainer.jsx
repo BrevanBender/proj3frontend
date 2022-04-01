@@ -12,7 +12,7 @@ const PostContainer = (props) =>{
             ?
             props.geoPosts.map((post)=>{
                 return(
-                <IndividualPost post={post} deletePost={props.deletePost} updatePost={props.updatePost} user={props.user}></IndividualPost>
+                <IndividualPost post={post} deletePost={props.deletePost} updatePost={props.updatePost} user={props.user} likePost={props.likePost}></IndividualPost>
                  
                 )
             })
