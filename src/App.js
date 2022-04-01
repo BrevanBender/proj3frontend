@@ -141,6 +141,7 @@ function App() {
     console.log("user\n", user)
   }
   useEffect(getPosts, [])
+  console.log(user)
   return (
     
     <div className="App">
@@ -160,9 +161,9 @@ function App() {
         </Box>
 
       
-        <TabPanel value='1'><span>hey</span><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
+        <TabPanel value='1'><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
-        <TabPanel value='3'><SearchContainer geoPosts={geoPosts}></SearchContainer></TabPanel>
+        <TabPanel value='3'><SearchContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></SearchContainer></TabPanel>
         <NewPost createNewPost={createNewPost} user={user}></NewPost>
         
 
