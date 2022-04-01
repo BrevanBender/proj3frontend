@@ -63,19 +63,23 @@ function App() {
       setValue(newValue);
   }
   const createNewPost= async (newPost)=>{
-    console.log(newPost)
-    setPosts([newPost, ...geoPosts])
-    console.log(geoPosts)
-    const apiResponse = await fetch(`${apiUrl}posts`, {
-      method: 'POST',
-      body: JSON.stringify(newPost),
-      headers: {
-        "Content-Type": "application/json"
-      }
-
-    })
-    const parsedResponse = await apiResponse.json()
-    console.log(parsedResponse)
+    try {
+      console.log(newPost)
+      const apiResponse = await fetch(`${apiUrl}posts`, {
+        method: 'POST',
+        body: JSON.stringify(newPost),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      await getPosts()
+      // const parsedResponse = await apiResponse.json()
+      // console.log(`response:${parsedResponse.data}`)
+      // setPosts([...geoPosts, parsedResponse.data])
+      console.log(geoPosts)
+    } catch (err) {
+      console.log(err)
+    }
   }
   const deletePost = async (postId)=>{
     try{
@@ -107,8 +111,7 @@ function App() {
     const newPosts = geoPosts.map(post =>post._id===idToUpdate ? postToUpdate : post)
     setPosts(newPosts)
   }
-  const likePost = async(e, idToLike, postToLike, userId, userLiked)=>{
-    e.preventDefault()
+  const likePost = async(idToLike, postToLike, userId, userLiked)=>{
     const apiResponse = await fetch(`${apiUrl}posts/${idToLike}`,{
       method: "PUT",
       body: JSON.stringify(postToLike),
@@ -119,19 +122,26 @@ function App() {
     })
     const newPosts = geoPosts.map(post =>post._id===idToLike ? postToLike : post)
     setPosts(newPosts)
-    
+    const updatedLikes = {
+      ...user,
+      likes: [...user.likes, idToLike]
+    }
     const apiResponseUser = await fetch(`${apiUrl}profile/${userId}`,{
       method: "PUT",
-      body: JSON.stringify(userLiked),
+      body: JSON.stringify(updatedLikes),
       headers:{
         "Content-Type": "application/json"
       }
     })
-    setUser(userLiked)
-    return false
+    console.log("liked apiRes\n", apiResponseUser.data)
+    setUser({
+      ...user,
+      likes: [...user.likes, idToLike]
+    })
+    console.log("user\n", user)
   }
   useEffect(getPosts, [])
-  
+console.log(user)
   return (
     
     <div className="App">
@@ -165,6 +175,7 @@ function App() {
     </div>
 
   );
+ 
 }
 
 export default App;

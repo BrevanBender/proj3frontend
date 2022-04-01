@@ -16,8 +16,9 @@ const PostButton = (props)=>{
         password: props.user.password,
         likes: props.user.likes
     })
-    const handleLike = (e)=>{
-        e.preventDefault()
+    
+    const handleLike = ()=>{
+        console.log(`before ${likedPost.likes}`)
         setLikedPost({
             ...likedPost,
             likes: likedPost.likes++
@@ -25,23 +26,33 @@ const PostButton = (props)=>{
         setUserLike({
             ...userLiked,
             likes: [...userLiked.likes, props.post._id]
+        
         })
+        console.log(`liked post ${likedPost.likes}`)
     }
+
     return(
         <div id="buttons">
-
             <form onSubmit={(e)=>{
-                e.preventDefault()
-                handleLike(e)
-                props.likePost(e, props.post._id, likedPost, props.user._id, userLiked)
-                console.log(props.user)
-                return false
+                if(props.user.likes.includes(props.post._id)){
+                    alert('You have already Liked this post')
+                
+                }else{
+                   handleLike()
+                props.likePost(props.post._id, likedPost, props.user._id, userLiked)
+
                 }
-                 } className='formStyling'>
+                e.preventDefault()
+            }} className='formStyling'>
                 <button type="submit" className="formButtons">Likes <br />{props.post.likes}</button>
                 </form>
-            <form className='formStyling'>
-                <button className="formButtons">Comment <br /> {props.post.comments.length}</button>
+            <form className='formStyling' onSubmit={(e)=>{
+                e.preventDefault()
+                if(props.user.likes.includes(props.post._id)){
+                    console.log("you have liked this post")
+                }
+            }}>
+                <button className="formButtons">Comment <br /> <span></span></button>
             </form>
             <form className='formStyling'>
                 <button className="formButtons">Share <br /><span></span></button>

@@ -3,10 +3,9 @@ import Edit from './edit/edit'
 import react, {useState} from "react";
 import './individualpost.css'
 import PostButton from './buttons/buttons';
+import OwnerControls from './ownercontrolls/ownercontrols';
 
 const IndividualPost = (props) =>{
-    console.log(props.post.user)
-    console.log(props.user)
     const[showCap, setShowCap] = useState(false)
     const[showForm, setShowForm]= useState(false)
     const showCaption = (e)=>{
@@ -43,19 +42,14 @@ const IndividualPost = (props) =>{
             <div id="titles">
             <h3>{props.post.location}</h3>
             <h5>{props.post.shotwith}</h5>
+            { props.user._id == props.post.user?
+            <OwnerControls user={props.user} post={props.post} updatePost={props.updatePost} deletePost={props.deletePost}></OwnerControls>
+        : null
+        } 
             </div>
             <p id="caption">{props.post.caption}</p>
             <PostButton id="buttons"likePost={props.likePost} post={props.post} user={props.user}></PostButton>
-        { props.user._id == props.post.user?
-        <div id='postOwner'>
-            <button onClick={()=>{
-                console.log(props.post)
-                props.deletePost(props.post._id)}
-            }>Delete this</button>
-        <Edit updatePost={props.updatePost} post={props.post}></Edit>
-        </div>
-        : null
-        }   
+        
         </div>
     )
 }
