@@ -141,7 +141,6 @@ function App() {
     console.log("user\n", user)
   }
   useEffect(getPosts, [])
-console.log(user)
   return (
     
     <div className="App">
