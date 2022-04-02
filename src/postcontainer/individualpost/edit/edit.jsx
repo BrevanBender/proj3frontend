@@ -11,7 +11,8 @@ const Edit = (props)=>{
         shotwith: props.post.shotwith,
         caption: props.post.caption,
         image: props.post.image,
-        _id: props.post._id
+        _id: props.post._id,
+        comments: props.post.comments
     })
     const handleInputChange = (e)=>{
         setUpdatePost({
@@ -22,6 +23,7 @@ const Edit = (props)=>{
     const submitUpdatePost = (e)=>{
         e.preventDefault()
         props.updatePost(props.post._id, updatePost)
+        setShowForm(false)
         //setshowing false and add ternary to update
     }
     return(

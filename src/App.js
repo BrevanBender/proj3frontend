@@ -99,6 +99,7 @@ function App() {
     console.log(err)
   }}
   const updatePost = async(idToUpdate, postToUpdate)=>{
+    console.log(postToUpdate)
     const apiResponse = await fetch(`${apiUrl}posts/${idToUpdate}`,{
       method: "PUT",
       body: JSON.stringify(postToUpdate),
@@ -109,8 +110,9 @@ function App() {
     
     const parsedResponse = await apiResponse.json()
     const newPosts = geoPosts.map(post =>post._id===idToUpdate ? postToUpdate : post)
-    setPosts(newPosts)
+    await getPosts()
   }
+
   const likePost = async(idToLike, postToLike, userId, userLiked)=>{
     const apiResponse = await fetch(`${apiUrl}posts/${idToLike}`,{
       method: "PUT",
@@ -133,7 +135,6 @@ function App() {
         "Content-Type": "application/json"
       }
     })
-    console.log("liked apiRes\n", apiResponseUser.data)
     setUser({
       ...user,
       likes: [...user.likes, idToLike]
@@ -155,7 +156,7 @@ function App() {
         <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <TabList value={value} onChange={handleChange} centered>
             <Tab label="Popular" value="1"/>
-            <Tab label="Following" value="2"/>
+            <Tab label="User" value="2"/>
             <Tab label="Search" value="3"/>
           </TabList>
         </Box>

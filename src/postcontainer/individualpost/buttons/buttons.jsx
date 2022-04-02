@@ -8,15 +8,29 @@ const PostButton = (props)=>{
         caption: props.post.caption,
         image: props.post.image,
         _id: props.post._id,
-        likes: props.post.likes
+        likes: props.post.likes,
+        comments: props.post.comments
     })
     const[userLiked, setUserLike] = useState({
         username: props.user.username,
         email: props.user.email,
         password: props.user.password,
-        likes: props.user.likes
+        likes: props.user.likes,
+        following: props.user.following
     })
-    
+    const[showComment, setShowComment]= useState(false)
+    const toggleComments =(e)=>{
+        e.preventDefault()
+        setShowComment(!showComment)
+    }
+    const handleCommentChange = (e)=>{
+        
+        setLikedPost({
+            ...likedPost,
+            comments: [e.target.value, ...props.post.comments]
+        })
+        console.log(likedPost.comments)
+    }
     const handleLike = ()=>{
         console.log(`before ${likedPost.likes}`)
         setLikedPost({
@@ -29,6 +43,13 @@ const PostButton = (props)=>{
         
         })
         console.log(`liked post ${likedPost.likes}`)
+    }
+
+    const submitCommentPost = (e)=>{
+        e.preventDefault()
+        props.updatePost(props.post._id, likedPost)
+        setShowComment(false)
+        //setshowing false and add ternary to update
     }
 
     return(
@@ -46,14 +67,24 @@ const PostButton = (props)=>{
             }} className='formStyling'>
                 <button type="submit" className="formButtons">Likes <br />{props.post.likes}</button>
                 </form>
-            <form className='formStyling' onSubmit={(e)=>{
-                e.preventDefault()
-                if(props.user.likes.includes(props.post._id)){
-                    console.log("you have liked this post")
-                }
-            }}>
-                <button className="formButtons">Comment <br /> <span></span></button>
+            <form className='formStyling'>
+                <button className="formButtons" onClick={toggleComments}>Comment <br /> <span></span></button>
             </form>
+            {showComment?
+            <div id="comments">
+                {props.post.comments.map((comment)=>{
+                    return(
+                        <p>{comment}</p>
+                    )
+                })}
+                <form action="" onSubmit={submitCommentPost}>
+                    <input type="text" onChange={handleCommentChange}/>
+                    <button type="submit"></button>
+                </form>
+            </div>
+            :
+            <></>
+            }
             <form className='formStyling'>
                 <button className="formButtons">Share <br /><span></span></button>
             </form>

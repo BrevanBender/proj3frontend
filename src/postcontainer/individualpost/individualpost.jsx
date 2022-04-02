@@ -22,7 +22,8 @@ const IndividualPost = (props) =>{
         shotwith: props.post.shotwith,
         caption: props.post.caption,
         image: props.post.image,
-        _id: props.post._id
+        _id: props.post._id,
+        user: props.post.user
     })
     const handleInputChange = (e)=>{
         setUpdatePost({
@@ -35,6 +36,7 @@ const IndividualPost = (props) =>{
         props.updatePost(props.post._id, updatePost)
         //setshowing false and add ternary to update
     }
+
     return (
         <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}
         onMouseEnter={showCaption}
@@ -48,7 +50,7 @@ const IndividualPost = (props) =>{
         } 
             </div>
             <p id="caption">{props.post.caption}</p>
-            <PostButton id="buttons"likePost={props.likePost} post={props.post} user={props.user}></PostButton>
+            <PostButton id="buttons"likePost={props.likePost} post={props.post} user={props.user} updatePost={props.updatePost}></PostButton>
         
         </div>
     )
