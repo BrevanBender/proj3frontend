@@ -24,7 +24,7 @@ const Edit = (props)=>{
         e.preventDefault()
         props.updatePost(props.post._id, updatePost)
         setShowForm(false)
-        //setshowing false and add ternary to update
+       
     }
     return(
         

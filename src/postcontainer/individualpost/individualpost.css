@@ -17,9 +17,9 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
     line-height: 2vh;
 }
-p{
+#caption{
     position: absolute;
-    bottom: 0;
+    bottom: -17px;
     opacity: 0;
     height: 0px;
     transition: height .5s;
@@ -27,7 +27,7 @@ p{
     width: 100%;
     color: white;
 }
-.show-caption p{
+.show-caption #caption{
     height: fit-content;
     opacity: 1;
 }

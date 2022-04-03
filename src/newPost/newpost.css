@@ -1,16 +1,4 @@
-#buttons{
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-.formStyling{
-    width: 25%;
-}
-.formButtons{
-    width: 100%;
-    height: 7vh;
-}
-#comments{
+#newform{
     z-index: 3;
     width: 33vw;
     height: 75vh;
@@ -22,6 +10,22 @@
     background: linear-gradient(-45deg, #82a8a6, #4b4da0, #4a226b, #3ea4be, #338055);
     animation: gradient 11s ease infinite;
     background-size: 500% 500%;
+    display: flex;
+    flex-direction: column;
+    color: aliceblue;
+    align-items: center;
+    justify-content: center;
+}
+#closeNew{
+    position: absolute;
+    top: 0%;
+    width: 8%;
+    left: 92%;
+    color: white;
+    background-color: #4a226b;
+}
+#newform input{
+    margin: 5% auto;
 }
 @keyframes gradient {
     0%{
@@ -34,19 +38,4 @@
         background-position: 0% 50%;
     }
     
-}
-#oldcomments{
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 70%;
-
-}
-#oldcomments p{
-    margin-top: 5px;
-    color: aliceblue;
-}
-#emptyCall{
-    color: aliceblue;
 }

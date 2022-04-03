@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './buttons.css'
+import CommentCont from "./hiddenpages/comments"
 
 const PostButton = (props)=>{
     const[likedPost, setLikedPost] = useState({
@@ -51,9 +52,17 @@ const PostButton = (props)=>{
         setShowComment(false)
         //setshowing false and add ternary to update
     }
+    const likedOwnPost =()=>{
+        alert("You Can't Like You Own Post")
+    }
 
     return(
         <div id="buttons">
+            {props.user._id === props.post.user?
+            <form className="formStyling">
+                <button onClick={(e)=>{e.preventDefault(); likedOwnPost()}} className="formButtons"></button>
+            </form>
+            :
             <form onSubmit={(e)=>{
                 if(props.user.likes.includes(props.post._id)){
                     alert('You have already Liked this post')
@@ -67,20 +76,15 @@ const PostButton = (props)=>{
             }} className='formStyling'>
                 <button type="submit" className="formButtons">Likes <br />{props.post.likes}</button>
                 </form>
+                
+                
+            }
             <form className='formStyling'>
                 <button className="formButtons" onClick={toggleComments}>Comment <br /> <span></span></button>
             </form>
             {showComment?
-            <div id="comments">
-                {props.post.comments.map((comment)=>{
-                    return(
-                        <p>{comment}</p>
-                    )
-                })}
-                <form action="" onSubmit={submitCommentPost}>
-                    <input type="text" onChange={handleCommentChange}/>
-                    <button type="submit"></button>
-                </form>
+            <div>
+                <CommentCont post={props.post} submitCommentPost={submitCommentPost} handleCommentChange={handleCommentChange}></CommentCont>
             </div>
             :
             <></>
