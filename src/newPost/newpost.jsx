@@ -6,9 +6,10 @@ const NewPost = (props)=>{
     const toggleNew = ()=>{
       setShowNew(!showNew)
     }
-    
+   
     const[newPost, setNewPost] = useState({
         location: '',
+        nearest: '',
         shotwith: '',
         caption: '',
         image: '',
@@ -33,12 +34,15 @@ const NewPost = (props)=>{
             props.createNewPost(newPost)
             setNewPost({
                 location: '',
+                nearest: '',
                 shotwith: '',
                 caption: '',
                 image: ''
             })
             }}>
             Location: <input type='text'  name='location'onChange={handleInputChange} value={newPost.location}></input>
+            <br />
+            Nearest City: <input type='text'  name='nearest'onChange={handleInputChange} value={newPost.nearest}></input>
             <br />
             Shot With: <input type='text'  name='shotwith'onChange={handleInputChange} value={newPost.shotwith}></input>
             <br />

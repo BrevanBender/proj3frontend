@@ -13,11 +13,14 @@ import TabPanel from '@mui/lab/TabPanel';
 import { ListItem } from '@mui/material';
 import apiUrl from './apiconfig';
 import ReqLogin from './login/login';
+import { ConstructionOutlined } from '@mui/icons-material';
+import axios from 'axios';
 
 
 function App() {
   const [geoPosts, setPosts] = useState([])
   const [user, setUser] = useState({})
+  const [auto, setAuto] = useState([])
   
   const reqSignUp = async (newLogin)=>{
     const apiResponse = await fetch(`${apiUrl}profile/signup`, {
@@ -44,7 +47,7 @@ function App() {
   console.log(parsedResponse)
   setUser(parsedResponse.data)
 }
-
+  
   const getPosts = async () =>{
     const apiResponse = await fetch(`${apiUrl}posts`)
   
@@ -54,6 +57,7 @@ function App() {
       parsedResponse.data
     )
   }
+  
   const [value, setValue] = React.useState("1");
   const [showNew, setShowNew] = useState(false)
   const toggleNew = ()=>{
@@ -76,7 +80,7 @@ function App() {
       // const parsedResponse = await apiResponse.json()
       // console.log(`response:${parsedResponse.data}`)
       // setPosts([...geoPosts, parsedResponse.data])
-      console.log(geoPosts)
+      console.log(apiResponse)
     } catch (err) {
       console.log(err)
     }
@@ -141,8 +145,9 @@ function App() {
     })
     console.log("user\n", user)
   }
+
+
   useEffect(getPosts, [])
-  console.log(user)
   return (
     
     <div className="App">
@@ -163,15 +168,13 @@ function App() {
 
       
         <TabPanel value='1'><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
-        <TabPanel value='2'><Followcontainer geoPosts={geoPosts}></Followcontainer></TabPanel>
+        <TabPanel value='2'><Followcontainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></SearchContainer></TabPanel>
-        <NewPost createNewPost={createNewPost} user={user}></NewPost>
-        
-
+        <NewPost createNewPost={createNewPost} user={user} auto={auto}></NewPost>
+          
       </TabContext>
 
       
-         
     }
     </div>
 

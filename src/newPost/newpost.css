@@ -39,3 +39,7 @@
     }
     
 }
+#recommended{
+    height: 33vh;
+    overflow-y: scroll;
+}

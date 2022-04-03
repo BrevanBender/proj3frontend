@@ -4,7 +4,6 @@ import IndividualPost from "./individualpost/individualpost"
 
 
 const PostContainer = (props) =>{
-    console.log(props.geoPosts)
     return(
         <div>
             
