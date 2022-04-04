@@ -47,7 +47,18 @@ function App() {
   console.log(parsedResponse)
   setUser(parsedResponse.data)
 }
-  
+  const followUser = async(userId, followingId)=>{
+    console.log(followingId)
+    const apiResponse = await fetch(`${apiUrl}profile/${userId}`, {
+      method: "PUT",
+      body: JSON.stringify(followingId),
+      headers: {
+        "Content-Type": "application/json"
+      }
+      })
+      console.log( await apiResponse.json())
+
+  }
   const getPosts = async () =>{
     const apiResponse = await fetch(`${apiUrl}posts`)
   
@@ -97,7 +108,7 @@ function App() {
   if(parsedResponse.success === true){
     const newPosts = geoPosts.filter(post=>post._id !== postId)
     console.log(newPosts)
-    setPosts(newPosts)
+    getPosts()
   }
   }catch(err){
     console.log(err)
@@ -161,15 +172,16 @@ function App() {
         <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <TabList value={value} onChange={handleChange} centered>
             <Tab label="Popular" value="1"/>
-            <Tab label="User" value="2"/>
+            <Tab label="Following" value="2"/>
             <Tab label="Search" value="3"/>
+            <Tab label="Profile" value="4"/>
           </TabList>
         </Box>
 
       
-        <TabPanel value='1'><PostContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
-        <TabPanel value='2'><Followcontainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></Followcontainer></TabPanel>
-        <TabPanel value='3'><SearchContainer geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></SearchContainer></TabPanel>
+        <TabPanel value='1'><PostContainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
+        <TabPanel value='2'><Followcontainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></Followcontainer></TabPanel>
+        <TabPanel value='3'><SearchContainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></SearchContainer></TabPanel>
         <NewPost createNewPost={createNewPost} user={user} auto={auto}></NewPost>
           
       </TabContext>

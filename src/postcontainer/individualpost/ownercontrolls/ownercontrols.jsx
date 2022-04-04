@@ -8,7 +8,7 @@ const OwnerControls = (props)=>{
     return(
     <div>
         <Edit updatePost={props.updatePost} post={props.post}></Edit>
-        { props.user._id == props.post.user?
+        { props.user._id == props.post.user.id?
             
         <div id='postOwner'>
             <button onClick={()=>{

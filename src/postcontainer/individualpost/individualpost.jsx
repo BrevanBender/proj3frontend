@@ -7,17 +7,25 @@ import OwnerControls from './ownercontrolls/ownercontrols';
 import apiUrl from '../../apiconfig';
 
 const IndividualPost = (props) =>{
-    const[showCap, setShowCap] = useState(false)
+    const[showFollow, setShowFollow] = useState(false)
     const[showForm, setShowForm]= useState(false)
     const[postOwner, setPostOwner] = useState([])
-    const findCreator= async(userId)=>{
-        const apiResponse = await fetch(`${apiUrl}profile/${userId}`)
-        const parsedResponse = await apiResponse.json()
-        console.log(parsedResponse.data.user)
-        setPostOwner([parsedResponse.data.user])
-        console.log(postOwner)
-      }
-    
+    const[userLiked, setUserLike] = useState({
+        username: props.user.username,
+        email: props.user.email,
+        password: props.user.password,
+        likes: props.user.likes,
+        following: props.user.following
+    })
+    const handleFollow = (id)=>{
+        setUserLike({
+            ...userLiked,
+            following: [...userLiked.following, id]
+        })
+    }
+    const toggleModal =()=>{
+        setShowFollow(!showFollow)
+    }
     const showCaption = (e)=>{
         e.target.classList.toggle('show-caption')
     }
@@ -46,13 +54,15 @@ const IndividualPost = (props) =>{
         props.updatePost(props.post._id, updatePost)
         //setshowing false and add ternary to update
     }
-    React.useEffect(() => {
-        fetch(`${apiUrl}profile/${props.post.user}`)
-          .then(results => results.json())
-          .then(data => {
-            setPostOwner(data.data.user);
-        });
-      }, []);
+    // React.useEffect(() => {
+    //     fetch(`${apiUrl}profile/${props.post.user}`)
+    //       .then(results => results.json())
+    //       .then(data => {
+    //         setPostOwner(data.data.user);
+    //     });
+    //   }, []);
+    console.log(props.user._id)
+    console.log(props.post.user.id)
     return (
         <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}
         onMouseEnter={showCaption}
@@ -62,9 +72,15 @@ const IndividualPost = (props) =>{
             <h3>{props.post.location}</h3>
             <h5>{props.post.nearest}</h5>
             </div>
-            { props.user._id == props.post.user?
+            { props.user._id == props.post.user.id?
             <OwnerControls id="ownerName" user={props.user} post={props.post} updatePost={props.updatePost} deletePost={props.deletePost}></OwnerControls>
-        : <h4 id="ownerName">{postOwner.username}</h4>
+        :   <div id='ifnotown'>
+            <h4 id="ownerName" onClick={toggleModal}>{postOwner.username}</h4>
+                <div id="useroptions">
+                    <button id='gotouser' onClick={()=>{props.changeViews([props.post.user.id])}}>View {props.post.user.username}'s Page</button>
+                    <button id='followuser' onClick={()=>{handleFollow(props.post.user.id); props.followUser(props.user._id, userLiked)}}>Follow {postOwner.username}</button>
+                </div>
+                </div>
         } 
             </div>
             <p id="caption">{props.post.caption}</p>

@@ -10,7 +10,8 @@ const PostButton = (props)=>{
         image: props.post.image,
         _id: props.post._id,
         likes: props.post.likes,
-        comments: props.post.comments
+        comments: props.post.comments,
+        user: {id:props.post.user.id, username: props.post.user.username}
     })
     const[userLiked, setUserLike] = useState({
         username: props.user.username,
@@ -58,7 +59,7 @@ const PostButton = (props)=>{
 
     return(
         <div id="buttons">
-            {props.user._id === props.post.user?
+            {props.user._id === props.post.user.id?
             <form className="formStyling">
                 <button onClick={(e)=>{e.preventDefault(); likedOwnPost()}} className="formButtons"></button>
             </form>
