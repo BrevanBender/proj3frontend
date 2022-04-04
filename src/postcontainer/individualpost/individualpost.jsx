@@ -74,7 +74,7 @@ const IndividualPost = (props) =>{
             { props.user._id == props.post.user.id?
             <OwnerControls id="ownerName" user={props.user} post={props.post} updatePost={props.updatePost} deletePost={props.deletePost}></OwnerControls>
         :   <div id='ifnotown'>
-            <h4 id="ownerName" onClick={toggleModal}>{postOwner.username}</h4>
+            <h4 id="ownerName" onClick={toggleModal}>{props.post.user.username}</h4>
                 <div id="useroptions">
                     <button id='gotouser' onClick={()=>{props.changeViews([props.post.user.id])}}>View {props.post.user.username}'s Page</button>
                     {props.user.following.includes(props.post.user.id)?

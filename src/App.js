@@ -15,9 +15,11 @@ import apiUrl from './apiconfig';
 import ReqLogin from './login/login';
 import { ConstructionOutlined } from '@mui/icons-material';
 import axios from 'axios';
+import Profile from './yourpage/profile';
 
 
 function App() {
+  
   const [geoPosts, setPosts] = useState([])
   const [user, setUser] = useState({})
   const [auto, setAuto] = useState([])
@@ -175,12 +177,12 @@ function App() {
       :
       
       <TabContext value={value}>
-        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        <Box sx={{ width: '100%', bgcolor: 'black' }}>
           <TabList value={value} onChange={handleChange} centered>
-            <Tab label="Popular" value="1"/>
-            <Tab label="Following" value="2"/>
-            <Tab label="Search" value="3"/>
-            <Tab label="Profile" value="4"/>
+            <Tab label="Popular" style={{color: 'Magenta'}}value="1"/>
+            <Tab label="Following" style={{color: 'Magenta'}} value="2"/>
+            <Tab label="Search" style={{color: 'Magenta'}}  value="3"/>
+            <Tab label="Profile" style={{color: 'Magenta'}} value="4"/>
           </TabList>
         </Box>
 
@@ -188,6 +190,7 @@ function App() {
         <TabPanel value='1'><PostContainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></PostContainer></TabPanel>
         <TabPanel value='2'><Followcontainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></Followcontainer></TabPanel>
         <TabPanel value='3'><SearchContainer followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></SearchContainer></TabPanel>
+        <TabPanel value='4'><Profile followUser={followUser} geoPosts={geoPosts} deletePost={deletePost} updatePost={updatePost} user={user} likePost={likePost}></Profile></TabPanel>
         <NewPost createNewPost={createNewPost} user={user} auto={auto}></NewPost>
           
       </TabContext>

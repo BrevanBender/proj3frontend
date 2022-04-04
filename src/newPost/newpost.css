@@ -43,3 +43,60 @@
     height: 33vh;
     overflow-y: scroll;
 }
+#newButton{
+    border-radius: 50%;
+    position: fixed;
+    z-index: 5;
+    width: 4vw;
+    height: 4vw;
+    left: 48vw;
+    bottom: 3vh;
+    background-color: black;
+    font-size: 2.5vw;
+    color: white;
+    animation: changeColor 5s linear infinite;
+    animation: glowing 1s linear infinite;
+}
+@keyframes changeColor{
+    0%{ 
+        color: #4a226b;
+    }
+    33%{
+        color: #4b4da0;
+    } 
+    66%{
+        color: #3ea4be;
+    }
+    100%{
+        color: #338055;
+    }
+}
+@keyframes glowing {
+    0%{
+        box-shadow: .1vw -.1vw rgb(74, 41, 151);
+    }
+    13%{
+        box-shadow: .1vw 0vw blue;
+    }
+    25%{
+        box-shadow: .1vw .1vw rgb(28, 136, 91);
+    }
+    38%{
+        box-shadow: 0vw .1vw rgb(192, 201, 66);
+    }
+    50%{
+        box-shadow: -.1vw .1vw rgb(202, 117, 5);
+    }
+    63%{
+        box-shadow: -.1vw 0vw rgb(158, 10, 10);
+    }
+    75%{
+        box-shadow: -.1vw -.1vw magenta;
+    }
+    88%{
+        box-shadow: 0vw -.1vw rgb(83, 83, 114)
+    }
+    100%{
+        box-shadow: .1vw -.1vw rgb(74, 41, 151);
+    }
+}
