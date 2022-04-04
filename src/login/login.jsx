@@ -13,7 +13,8 @@ const ReqLogin= (props)=>{
     const[newLogin, setNewLogin] = useState({
         username: '',
         email: '',
-        password: ''
+        password: '',
+        
     })
     const handleInputChange = (e)=>{
         setNewLogin({

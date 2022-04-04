@@ -56,7 +56,9 @@ function App() {
         "Content-Type": "application/json"
       }
       })
-      console.log( await apiResponse.json())
+      const parsedResponse= await apiResponse.json()
+      console.log(parsedResponse.data)
+      setUser(parsedResponse.data)
 
   }
   const getPosts = async () =>{
@@ -68,7 +70,7 @@ function App() {
       parsedResponse.data
     )
   }
-  
+  console.log(user)
   const [value, setValue] = React.useState("1");
   const [showNew, setShowNew] = useState(false)
   const toggleNew = ()=>{

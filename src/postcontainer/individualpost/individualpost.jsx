@@ -22,6 +22,7 @@ const IndividualPost = (props) =>{
             ...userLiked,
             following: [...userLiked.following, id]
         })
+        console.log(userLiked)
     }
     const toggleModal =()=>{
         setShowFollow(!showFollow)
