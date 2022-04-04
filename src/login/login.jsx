@@ -30,10 +30,10 @@ const ReqLogin= (props)=>{
     return(
         <>
         <TabContext value={value}>
-        <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        <Box sx={{ width: '100%', bgcolor: 'black' }}>
           <TabList value={value} onChange={handleChange} centered>
-            <Tab label="Sign Up" value="1"/>
-            <Tab label="Login" value="2"/>
+            <Tab label="Sign Up" value="1" style={{color:'magenta'}}/>
+            <Tab label="Login" value="2" style={{color:'magenta'}}/>
             
           </TabList>
         </Box>

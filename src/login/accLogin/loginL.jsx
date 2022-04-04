@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import'./log.css'
 const LoginForm= (props)=>{
     const[newLogin, setNewLogin] = useState({
         username: '',
@@ -25,7 +25,7 @@ const LoginForm= (props)=>{
                 email: '',
                 password: ''
                  })
-            }}>
+            }} id="signForm">
                 Username: <input type='text'  name='username'onChange={handleInputChange} value={newLogin.username}></input>
                 Password: <input type='password' name='password' onChange={handleInputChange} value={newLogin.password}></input>
                 <button type="submit">Login</button>
