@@ -62,7 +62,7 @@ const IndividualPost = (props) =>{
     //         setPostOwner(data.data.user);
     //     });
     //   }, []);
-    console.log(props.user._id)
+    console.log(props.user.following)
     console.log(props.post.user.id)
     return (
         <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}
@@ -79,7 +79,11 @@ const IndividualPost = (props) =>{
             <h4 id="ownerName" onClick={toggleModal}>{postOwner.username}</h4>
                 <div id="useroptions">
                     <button id='gotouser' onClick={()=>{props.changeViews([props.post.user.id])}}>View {props.post.user.username}'s Page</button>
+                    {props.user.following.includes(props.post.user.id)?
+                    <button id='followuser' onClick={()=>{alert("You already Follow Them")}}>Following {postOwner.username}</button>
+                    :
                     <button id='followuser' onClick={()=>{handleFollow(props.post.user.id); props.followUser(props.user._id, userLiked)}}>Follow {postOwner.username}</button>
+                    }
                 </div>
                 </div>
         } 
