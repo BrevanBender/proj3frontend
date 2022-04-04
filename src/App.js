@@ -48,10 +48,14 @@ function App() {
   setUser(parsedResponse.data)
 }
   const followUser = async(userId, followingId)=>{
-    console.log(followingId)
+    const newFollowing ={
+        ...user,
+        following: [...user.following, followingId]
+      
+    }
     const apiResponse = await fetch(`${apiUrl}profile/${userId}`, {
       method: "PUT",
-      body: JSON.stringify(followingId),
+      body: JSON.stringify(newFollowing),
       headers: {
         "Content-Type": "application/json"
       }

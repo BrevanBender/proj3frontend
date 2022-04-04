@@ -17,13 +17,9 @@ const IndividualPost = (props) =>{
         likes: props.user.likes,
         following: props.user.following
     })
-    const handleFollow = (id)=>{
-        setUserLike({
-            ...userLiked,
-            following: [...userLiked.following, id]
-        })
-        console.log(userLiked)
-    }
+   
+
+
     const toggleModal =()=>{
         setShowFollow(!showFollow)
     }
@@ -63,7 +59,7 @@ const IndividualPost = (props) =>{
     //     });
     //   }, []);
     console.log(props.user.following)
-    console.log(props.post.user.id)
+    
     return (
         <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}
         onMouseEnter={showCaption}
@@ -73,6 +69,8 @@ const IndividualPost = (props) =>{
             <h3>{props.post.location}</h3>
             <h5>{props.post.nearest}</h5>
             </div>
+            {props.post.user?
+            <section id='fragile'>
             { props.user._id == props.post.user.id?
             <OwnerControls id="ownerName" user={props.user} post={props.post} updatePost={props.updatePost} deletePost={props.deletePost}></OwnerControls>
         :   <div id='ifnotown'>
@@ -82,11 +80,15 @@ const IndividualPost = (props) =>{
                     {props.user.following.includes(props.post.user.id)?
                     <button id='followuser' onClick={()=>{alert("You already Follow Them")}}>Following {postOwner.username}</button>
                     :
-                    <button id='followuser' onClick={()=>{handleFollow(props.post.user.id); props.followUser(props.user._id, userLiked)}}>Follow {postOwner.username}</button>
+                    <button id='followuser' onClick={()=>{ props.followUser(props.user._id, props.post.user.id)}}>Follow {postOwner.username}</button>
                     }
                 </div>
                 </div>
         } 
+        </section>
+        : 
+        <></>
+        }
             </div>
             <p id="caption">{props.post.caption}</p>
             <PostButton id="buttons"likePost={props.likePost} post={props.post} user={props.user} updatePost={props.updatePost}></PostButton>
