@@ -33,7 +33,6 @@ function App() {
         }
     })
     const parsedResponse = await apiResponse.json()
-    console.log(parsedResponse)
     setUser(parsedResponse.data)
     alert(`Logged in as new user ${parsedResponse.data.username}`)
 }
@@ -46,7 +45,7 @@ function App() {
         }
   })
   const parsedResponse = await apiResponse.json()
-  console.log(parsedResponse.data)
+
   setUser(parsedResponse.data)
 }
   const followUser = async(userId, followingId)=>{
@@ -63,7 +62,7 @@ function App() {
       }
       })
       const parsedResponse= await apiResponse.json()
-      console.log(parsedResponse.data)
+  
       setUser(parsedResponse.data)
 
   }
@@ -71,7 +70,6 @@ function App() {
     const apiResponse = await fetch(`${apiUrl}posts`)
   
     const parsedResponse = await apiResponse.json()
-    console.log(parsedResponse.data)
     setPosts(
       parsedResponse.data
     )
@@ -95,7 +93,6 @@ function App() {
         }
       })
       const parsedResponse = await apiResponse.json()
-      console.log(`response:${JSON.stringify(parsedResponse.data)}`)
       setPosts([
         ...geoPosts,
        parsedResponse.data
@@ -106,25 +103,21 @@ function App() {
   }
   const deletePost = async (postId)=>{
     try{
-    console.log(postId)
     const apiResponse = await fetch(`${apiUrl}posts/${postId}`,{
     method: "DELETE",
   })
   const parsedResponse = await apiResponse.json()
 
-  console.log(parsedResponse)
+
   if(parsedResponse.success === true){
     const newPosts = geoPosts.filter(post=> post._id !== postId)
-    console.log(newPosts)
     setPosts(
       newPosts
     )
   }
   }catch(err){
-    console.log(err)
   }}
   const updatePost = async(idToUpdate, postToUpdate)=>{
-    console.log(postToUpdate)
     const apiResponse = await fetch(`${apiUrl}posts/${idToUpdate}`,{
       method: "PUT",
       body: JSON.stringify(postToUpdate),
@@ -166,7 +159,6 @@ function App() {
       ...user,
       likes: [...user.likes, idToLike]
     })
-    console.log("user\n", user)
   }
 
 

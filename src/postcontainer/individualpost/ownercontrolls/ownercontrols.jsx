@@ -12,7 +12,6 @@ const OwnerControls = (props)=>{
             
         <div id='postOwner'>
             <button onClick={()=>{
-                console.log(props.post)
                 props.deletePost(props.post._id)}
             }>Delete this</button>
         
