@@ -36,7 +36,8 @@ const NewPost = (props)=>{
                 nearest: '',
                 shotwith: '',
                 caption: '',
-                image: ''
+                image: '',
+                user: {id:`${props.user._id}`, username: `${props.user.username}`}
             })
             }}>
             Location: <input type='text'  name='location'onChange={handleInputChange} value={newPost.location}></input>

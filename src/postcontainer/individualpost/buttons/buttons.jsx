@@ -11,7 +11,7 @@ const PostButton = (props)=>{
         _id: props.post._id,
         likes: props.post.likes,
         comments: props.post.comments,
-        user: {id:props.post.user.id, username: props.post.user.username}
+        user: props.post.user
     })
     const[userLiked, setUserLike] = useState({
         username: props.user.username,

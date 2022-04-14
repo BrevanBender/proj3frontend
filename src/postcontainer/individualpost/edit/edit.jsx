@@ -8,11 +8,13 @@ const Edit = (props)=>{
       }
     const[updatePost, setUpdatePost] = useState({
         location: props.post.location,
+        nearest: props.post.nearest,
         shotwith: props.post.shotwith,
         caption: props.post.caption,
         image: props.post.image,
         _id: props.post._id,
-        comments: props.post.comments
+        comments: props.post.comments,
+        user: props.post.user
     })
     const handleInputChange = (e)=>{
         setUpdatePost({
