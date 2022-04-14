@@ -58,7 +58,7 @@ const IndividualPost = (props) =>{
     //         setPostOwner(data.data.user);
     //     });
     //   }, []);
-    console.log(props.user.following)
+
     
     return (
         <div id="indiCont" style={{backgroundImage: `url(${props.post.image})`}}

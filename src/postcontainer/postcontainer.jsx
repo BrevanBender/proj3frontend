@@ -5,11 +5,10 @@ import './postcont.css'
 
 const PostContainer = (props) =>{
     const[desiredPosts, setDesiredPosts]= useState([])
-    console.log(desiredPosts)
     const changeViews = (desiredArray)=>{
         const filteredArr= props.geoPosts.filter(post=> desiredArray.includes(post.user.id))
         setDesiredPosts(filteredArr)
-        console.log(filteredArr)
+        
         }
     const clearViews = ()=>{
         setDesiredPosts([])

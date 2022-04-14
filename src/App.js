@@ -46,7 +46,7 @@ function App() {
         }
   })
   const parsedResponse = await apiResponse.json()
-  console.log(parsedResponse)
+  console.log(parsedResponse.data)
   setUser(parsedResponse.data)
 }
   const followUser = async(userId, followingId)=>{
@@ -76,7 +76,7 @@ function App() {
       parsedResponse.data
     )
   }
-  console.log(user)
+  
   const [value, setValue] = React.useState("1");
   const [showNew, setShowNew] = useState(false)
   const toggleNew = ()=>{
@@ -87,7 +87,6 @@ function App() {
   }
   const createNewPost= async (newPost)=>{
     try {
-      console.log(newPost)
       const apiResponse = await fetch(`${apiUrl}posts`, {
         method: 'POST',
         body: JSON.stringify(newPost),
@@ -95,11 +94,12 @@ function App() {
           "Content-Type": "application/json"
         }
       })
-      await getPosts()
-      // const parsedResponse = await apiResponse.json()
-      // console.log(`response:${parsedResponse.data}`)
-      // setPosts([...geoPosts, parsedResponse.data])
-      console.log(apiResponse)
+      const parsedResponse = await apiResponse.json()
+      console.log(`response:${JSON.stringify(parsedResponse.data)}`)
+      setPosts([
+        ...geoPosts,
+       parsedResponse.data
+      ])
     } catch (err) {
       console.log(err)
     }
@@ -114,9 +114,11 @@ function App() {
 
   console.log(parsedResponse)
   if(parsedResponse.success === true){
-    const newPosts = geoPosts.filter(post=>post._id !== postId)
+    const newPosts = geoPosts.filter(post=> post._id !== postId)
     console.log(newPosts)
-    getPosts()
+    setPosts(
+      newPosts
+    )
   }
   }catch(err){
     console.log(err)
@@ -133,7 +135,9 @@ function App() {
     
     const parsedResponse = await apiResponse.json()
     const newPosts = geoPosts.map(post =>post._id===idToUpdate ? postToUpdate : post)
-    await getPosts()
+    setPosts(
+      newPosts
+    )
   }
 
   const likePost = async(idToLike, postToLike, userId, userLiked)=>{
