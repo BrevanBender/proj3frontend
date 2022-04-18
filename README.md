@@ -12,3 +12,7 @@ React Router will be super helpful for this app and I looke forward to implement
 
 Link to frontend Heroku! 
 https://geogramclient.herokuapp.com/
+
+
+#2.0
+I am planning on going through the UX modules to revamp this project and hoping to refactor the login logic to use something more industry standard.
